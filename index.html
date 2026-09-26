@@ -76,7 +76,6 @@
         .stats-card p { font-size: 13px; opacity: 0.9; text-transform: uppercase; letter-spacing: 1px; }
         .stats-card h2 { font-size: 38px; margin-top: 6px; font-weight: 800; }
 
-        /* Ad Container Box */
         .ad-box {
             display: flex;
             justify-content: center;
@@ -130,6 +129,8 @@
         }
         .btn-tg { background: #0284c7; color: #fff; }
         .btn-tg:hover { background: #0369a1; }
+        .btn-ads { background: #f59e0b; color: #fff; }
+        .btn-ads:hover { background: #d97706; }
         .btn-withdraw { background: #10b981; color: #fff; }
         .btn-withdraw:hover { background: #059669; }
 
@@ -210,6 +211,7 @@
         </div>
 
         <div class="action-row">
+            <button class="btn btn-ads" onclick="watchAdsTask()" id="adsBtn">Watch 20 Ads & Earn $5.00 (0/20)</button>
             <button class="btn btn-tg" onclick="subscribeTelegram()" id="tgBtn">Join & Subscribe Telegram (+$0.1)</button>
             <button class="btn btn-withdraw" onclick="withdrawMoney()" id="wdBtn">Withdraw ($100 Min)</button>
         </div>
@@ -256,7 +258,9 @@
     let balance = 0.00;
     let currentQIndex = 0;
     let hasSubscribedTelegram = false;
+    let watchedAdsCount = 0;
     const tgLink = "https://t.me/SMARtTrader0r";
+    const adsterraDirectLink = "https://sneakinghalfbakedcucumber.com/0d/61/12/0d611270737c19cfba639f6c680670fe.js"; // አውቶማቲክ ማስታወቂያ ሊንክ
 
     const baseQuestions = [
         { q: "What is the capital city of France?", options: ["London", "Berlin", "Paris", "Madrid"], answer: 2 },
@@ -342,6 +346,27 @@
         document.getElementById("balanceText").innerText = "$" + balance.toFixed(2);
     }
 
+    // 20 ማስታወቂያዎችን በቅደም ተከተል የማየት ሎጂክ
+    function watchAdsTask() {
+        if (watchedAdsCount < 20) {
+            watchedAdsCount++;
+            // የማስታወቂያ ሊንኩን በአዲስ ታብ ይከፍታል (አንተም ማስታወቂያ ታያለህ)
+            window.open("https://sneakinghalfbakedcucumber.com/0d/61/12/0d611270737c19cfba639f6c680670fe.js", '_blank');
+            
+            if (watchedAdsCount < 20) {
+                document.getElementById("adsBtn").innerText = `Watch Next Ad (${watchedAdsCount}/20)`;
+                alert(`🎯 Ad ${watchedAdsCount} viewed! Watch ${20 - watchedAdsCount} more to claim $5.00`);
+            } else {
+                balance += 5.00;
+                updateBalance();
+                document.getElementById("adsBtn").innerText = `Completed! ($5.00 Claimed)`;
+                document.getElementById("adsBtn").disabled = true;
+                document.getElementById("adsBtn").style.background = "#059669";
+                alert("🎉 Congratulations! You successfully watched 20 ads and earned $5.00 bonus!");
+            }
+        }
+    }
+
     function toggleDrawer() {
         document.getElementById("settingsDrawer").classList.toggle("open");
     }
@@ -357,6 +382,9 @@
 
         document.getElementById("appTitle").innerText = t.title;
         document.getElementById("balLabel").innerText = t.bal;
+        if (watchedAdsCount < 20) {
+            document.getElementById("adsBtn").innerText = `Watch 20 Ads & Earn $5.00 (${watchedAdsCount}/20)`;
+        }
         document.getElementById("tgBtn").innerText = t.tg;
         document.getElementById("wdBtn").innerText = t.wd;
         document.getElementById("settingsTitle").innerText = t.set;
