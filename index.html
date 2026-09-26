@@ -29,7 +29,6 @@
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; transition: background 0.3s, color 0.3s; }
         body { background: var(--bg-color); color: var(--text-color); display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; }
         
-        /* App Frame - Mobile Proportions */
         .app-container {
             width: 100%;
             max-width: 410px;
@@ -46,7 +45,6 @@
             .app-container { border-radius: 30px; border: 4px solid var(--border-color); height: 92vh; }
         }
 
-        /* Header */
         .app-header {
             display: flex;
             justify-content: space-between;
@@ -58,7 +56,6 @@
         .app-title { font-size: 18px; font-weight: 800; color: #3b82f6; letter-spacing: 0.5px; }
         .menu-btn { background: none; border: none; color: var(--text-color); font-size: 24px; cursor: pointer; }
 
-        /* Main Scrollable Body */
         .app-body {
             flex: 1;
             overflow-y: auto;
@@ -68,7 +65,6 @@
             gap: 16px;
         }
 
-        /* Balance & Stats Card */
         .stats-card {
             background: linear-gradient(135deg, #2563eb, #1d4ed8);
             padding: 22px;
@@ -80,7 +76,20 @@
         .stats-card p { font-size: 13px; opacity: 0.9; text-transform: uppercase; letter-spacing: 1px; }
         .stats-card h2 { font-size: 38px; margin-top: 6px; font-weight: 800; }
 
-        /* Quiz Box */
+        /* Ad Container Box */
+        .ad-box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: var(--header-bg);
+            padding: 10px;
+            border-radius: 12px;
+            border: 1px dashed var(--border-color);
+            overflow: hidden;
+            text-align: center;
+            min-height: 60px;
+        }
+
         .quiz-box {
             background: var(--header-bg);
             padding: 20px;
@@ -107,7 +116,6 @@
         .option-btn.correct { background: #059669 !important; color: #fff !important; border-color: #047857; }
         .option-btn.wrong { background: #dc2626 !important; color: #fff !important; border-color: #b91c1c; }
 
-        /* Action Buttons */
         .action-row { display: flex; flex-direction: column; gap: 12px; }
         .btn {
             width: 100%;
@@ -125,7 +133,6 @@
         .btn-withdraw { background: #10b981; color: #fff; }
         .btn-withdraw:hover { background: #059669; }
 
-        /* Side Settings Drawer */
         .drawer {
             position: absolute;
             top: 0; right: -100%;
@@ -168,12 +175,38 @@
             <h2 id="balanceText">$0.00</h2>
         </div>
 
+        <!-- Adsterra Banner Ad 1 -->
+        <div class="ad-box">
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '3b79b1600f4dce57954711090d5df308',
+                    'format' : 'iframe',
+                    'height' : 60,
+                    'width' : 468,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="https://sneakinghalfbakedcucumber.com/3b79b1600f4dce57954711090d5df308/invoke.js"></script>
+        </div>
+
         <div class="quiz-box">
             <div class="q-info-banner" id="qInfoBanner">💎 Answer correct & earn $0.10</div>
             <div class="q-text" id="questionText">Loading quiz...</div>
-            <div class="options-list" id="optionsList">
-                <!-- Populated via JS -->
-            </div>
+            <div class="options-list" id="optionsList"></div>
+        </div>
+
+        <!-- Adsterra Banner Ad 2 -->
+        <div class="ad-box">
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '4dcd2d5be45bb39562568854e063e5df',
+                    'format' : 'iframe',
+                    'height' : 50,
+                    'width' : 320,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="https://sneakinghalfbakedcucumber.com/4dcd2d5be45bb39562568854e063e5df/invoke.js"></script>
         </div>
 
         <div class="action-row">
@@ -215,13 +248,16 @@
     </div>
 </div>
 
+<!-- Adsterra Social Bar & Extra Scripts -->
+<script type="text/javascript" src="https://sneakinghalfbakedcucumber.com/0d/61/12/0d611270737c19cfba639f6c680670fe.js"></script>
+<script type="text/javascript" src="https://sneakinghalfbakedcucumber.com/88/4a/d2/884ad2919e91233a93cb084599dce00a.js"></script>
+
 <script>
     let balance = 0.00;
     let currentQIndex = 0;
     let hasSubscribedTelegram = false;
     const tgLink = "https://t.me/SMARtTrader0r";
 
-    // 1000+ የተመረጡ ጥያቄዎች (በማቀናጀት አጠቃላይ ጥልቀት ያላቸው ጥያቄዎች)
     const baseQuestions = [
         { q: "What is the capital city of France?", options: ["London", "Berlin", "Paris", "Madrid"], answer: 2 },
         { q: "Which programming language powers interactive web browsers?", options: ["Python", "JavaScript", "C++", "Java"], answer: 1 },
@@ -240,10 +276,9 @@
         { q: "In which historical year did World War II officially end?", options: ["1940", "1942", "1945", "1950"], answer: 2 }
     ];
 
-    // እስከ 1,000+ ጥያቄዎች እንዲኖሩት አውቶማቲክ ማባዣ ሎጂክ
     let questions = [];
     for (let i = 0; i < 70; i++) {
-        baseQuestions.forEach((item, idx) => {
+        baseQuestions.forEach((item) => {
             questions.push({
                 q: `[Level ${i+1}] ${item.q}`,
                 options: item.options,
@@ -335,7 +370,6 @@
 
     function subscribeTelegram() {
         window.open(tgLink, '_blank');
-        
         if (!hasSubscribedTelegram) {
             hasSubscribedTelegram = true;
             balance += 0.10;
@@ -351,7 +385,6 @@
         }
     }
 
-    // የመጀመሪያ ጫማ
     loadQuestion();
 </script>
 
