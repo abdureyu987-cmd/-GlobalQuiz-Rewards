@@ -27,13 +27,25 @@
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; transition: background 0.3s, color 0.3s; }
-        body { background: var(--bg-color); color: var(--text-color); display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; }
+        
+        /* ስክሪኑ እንዳይንቀሳቀስ እና መሃል ላይ እንዲሆን ማድረግ */
+        html, body {
+            height: 100%;
+            width: 100%;
+            background: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: fixed;
+        }
         
         .app-container {
             width: 100%;
             max-width: 410px;
             height: 100%;
-            max-height: 850px;
+            max-height: 100vh;
             background: var(--card-bg);
             display: flex;
             flex-direction: column;
@@ -42,72 +54,75 @@
             overflow: hidden;
         }
         @media(min-width: 450px) {
-            .app-container { border-radius: 30px; border: 4px solid var(--border-color); height: 92vh; }
+            .app-container { border-radius: 24px; border: 3px solid var(--border-color); height: 92vh; max-height: 820px; }
         }
 
         .app-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 16px 20px;
+            padding: 12px 18px;
             background: var(--header-bg);
             border-bottom: 1px solid var(--border-color);
         }
-        .app-title { font-size: 18px; font-weight: 800; color: #3b82f6; letter-spacing: 0.5px; }
-        .menu-btn { background: none; border: none; color: var(--text-color); font-size: 24px; cursor: pointer; }
+        .app-title { font-size: 16px; font-weight: 800; color: #3b82f6; letter-spacing: 0.5px; }
+        .menu-btn { background: none; border: none; color: var(--text-color); font-size: 22px; cursor: pointer; }
 
         .app-body {
             flex: 1;
             overflow-y: auto;
-            padding: 20px;
+            padding: 14px;
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 10px;
         }
+        /* የስክሮልባር ውበት */
+        .app-body::-webkit-scrollbar { width: 4px; }
+        .app-body::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 4px; }
 
         .stats-card {
             background: linear-gradient(135deg, #2563eb, #1d4ed8);
-            padding: 22px;
-            border-radius: 20px;
+            padding: 14px;
+            border-radius: 16px;
             text-align: center;
-            box-shadow: 0 8px 20px rgba(37,99,235,0.3);
+            box-shadow: 0 6px 15px rgba(37,99,235,0.3);
             color: #fff;
         }
-        .stats-card p { font-size: 13px; opacity: 0.9; text-transform: uppercase; letter-spacing: 1px; }
-        .stats-card h2 { font-size: 38px; margin-top: 6px; font-weight: 800; }
+        .stats-card p { font-size: 11px; opacity: 0.9; text-transform: uppercase; letter-spacing: 1px; }
+        .stats-card h2 { font-size: 28px; margin-top: 4px; font-weight: 800; }
 
         .ad-box {
             display: flex;
             justify-content: center;
             align-items: center;
             background: var(--header-bg);
-            padding: 10px;
-            border-radius: 12px;
+            padding: 6px;
+            border-radius: 10px;
             border: 1px dashed var(--border-color);
             overflow: hidden;
             text-align: center;
-            min-height: 60px;
+            min-height: 50px;
         }
 
         .quiz-box {
             background: var(--header-bg);
-            padding: 20px;
-            border-radius: 20px;
+            padding: 14px;
+            border-radius: 16px;
             border: 1px solid var(--border-color);
         }
-        .q-info-banner { font-size: 13px; color: #38bdf8; font-weight: 600; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
-        .q-text { font-size: 16px; font-weight: 700; margin-bottom: 16px; line-height: 1.5; color: var(--text-color); }
+        .q-info-banner { font-size: 12px; color: #38bdf8; font-weight: 600; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+        .q-text { font-size: 14px; font-weight: 700; margin-bottom: 12px; line-height: 1.4; color: var(--text-color); }
         
-        .options-list { display: flex; flex-direction: column; gap: 10px; }
+        .options-list { display: flex; flex-direction: column; gap: 8px; }
         .option-btn {
             background: var(--btn-bg);
             border: 1px solid var(--border-color);
-            padding: 14px 16px;
-            border-radius: 14px;
+            padding: 11px 14px;
+            border-radius: 12px;
             color: var(--text-color);
             text-align: left;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 500;
             transition: 0.2s;
         }
@@ -115,17 +130,17 @@
         .option-btn.correct { background: #059669 !important; color: #fff !important; border-color: #047857; }
         .option-btn.wrong { background: #dc2626 !important; color: #fff !important; border-color: #b91c1c; }
 
-        .action-row { display: flex; flex-direction: column; gap: 12px; }
+        .action-row { display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px; }
         .btn {
             width: 100%;
-            padding: 15px;
+            padding: 12px;
             border: none;
-            border-radius: 14px;
+            border-radius: 12px;
             font-weight: bold;
             cursor: pointer;
-            font-size: 15px;
+            font-size: 13px;
             text-align: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
         .btn-tg { background: #0284c7; color: #fff; }
         .btn-tg:hover { background: #0369a1; }
@@ -141,22 +156,22 @@
             background: var(--card-bg);
             z-index: 100;
             transition: 0.3s ease-in-out;
-            padding: 20px;
+            padding: 18px;
             box-shadow: -5px 0 25px rgba(0,0,0,0.5);
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 16px;
             border-left: 1px solid var(--border-color);
         }
         .drawer.open { right: 0; }
-        .drawer-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 12px; }
-        .drawer-header h3 { color: var(--text-color); font-size: 18px; }
-        .close-drawer { background: none; border: none; color: var(--text-color); font-size: 22px; cursor: pointer; }
+        .drawer-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; }
+        .drawer-header h3 { color: var(--text-color); font-size: 16px; }
+        .close-drawer { background: none; border: none; color: var(--text-color); font-size: 20px; cursor: pointer; }
         
-        .setting-group { display: flex; flex-direction: column; gap: 8px; }
-        .setting-group label { font-size: 13px; color: var(--text-muted); font-weight: 600; }
+        .setting-group { display: flex; flex-direction: column; gap: 6px; }
+        .setting-group label { font-size: 12px; color: var(--text-muted); font-weight: 600; }
         .setting-group select {
-            background: var(--header-bg); color: var(--text-color); border: 1px solid var(--border-color); padding: 12px; border-radius: 12px; outline: none; font-size: 14px; cursor: pointer;
+            background: var(--header-bg); color: var(--text-color); border: 1px solid var(--border-color); padding: 10px; border-radius: 10px; outline: none; font-size: 13px; cursor: pointer;
         }
     </style>
 </head>
@@ -245,7 +260,7 @@
         
         <div class="setting-group">
             <label id="quotaLabel">System Status</label>
-            <p style="font-size: 13px; color: #10b981; font-weight: 600;" id="quotaStatus">1,000+ Questions Active</p>
+            <p style="font-size: 12px; color: #10b981; font-weight: 600;" id="quotaStatus">1,000+ Questions Active</p>
         </div>
     </div>
 </div>
@@ -260,7 +275,6 @@
     let hasSubscribedTelegram = false;
     let watchedAdsCount = 0;
     const tgLink = "https://t.me/SMARtTrader0r";
-    const adsterraDirectLink = "https://sneakinghalfbakedcucumber.com/0d/61/12/0d611270737c19cfba639f6c680670fe.js"; // አውቶማቲክ ማስታወቂያ ሊንክ
 
     const baseQuestions = [
         { q: "What is the capital city of France?", options: ["London", "Berlin", "Paris", "Madrid"], answer: 2 },
@@ -346,11 +360,9 @@
         document.getElementById("balanceText").innerText = "$" + balance.toFixed(2);
     }
 
-    // 20 ማስታወቂያዎችን በቅደም ተከተል የማየት ሎጂክ
     function watchAdsTask() {
         if (watchedAdsCount < 20) {
             watchedAdsCount++;
-            // የማስታወቂያ ሊንኩን በአዲስ ታብ ይከፍታል (አንተም ማስታወቂያ ታያለህ)
             window.open("https://sneakinghalfbakedcucumber.com/0d/61/12/0d611270737c19cfba639f6c680670fe.js", '_blank');
             
             if (watchedAdsCount < 20) {
