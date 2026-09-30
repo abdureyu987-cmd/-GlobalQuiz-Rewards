@@ -63,7 +63,7 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            overflow-y: auto;
+            overflow: hidden;
         }
 
         .stats-card {
@@ -88,8 +88,6 @@
             overflow: hidden;
             text-align: center;
             min-height: 50px;
-            color: var(--text-muted);
-            font-size: 12px;
         }
 
         .quiz-box {
@@ -132,7 +130,7 @@
         .btn-tg { background: #0284c7; color: #fff; }
         .btn-withdraw { background: #10b981; color: #fff; }
 
-        /* Settings Drawer */
+        /* Settings Drawer (ቋንቋ ብቻ) */
         .drawer {
             position: absolute;
             top: 0; right: -100%;
@@ -158,13 +156,6 @@
             background: var(--header-bg); color: var(--text-color); border: 1px solid var(--border-color); padding: 10px; border-radius: 10px; outline: none; font-size: 13px; cursor: pointer;
         }
     </style>
-
-    <!-- Start.io Web SDK Integration using your App ID: 208217910 -->
-    <script type="text/javascript">
-        // Start.io initialization script placeholder for web/hybrid view
-        window.startapp = window.startapp || {};
-        window.startapp.appId = "208217910";
-    </script>
 </head>
 <body>
 
@@ -182,9 +173,12 @@
             <h2 id="balanceText">$0.00</h2>
         </div>
 
-        <!-- Start.io Banner Ad Box -->
-        <div class="ad-box" id="startIoBannerContainer">
-            <span>Start.io Ad Space (Smart Earn Pro)</span>
+        <!-- Adsterra Banner -->
+        <div class="ad-box">
+            <script type="text/javascript">
+                atOptions = { 'key' : '3b79b1600f4dce57954711090d5df308', 'format' : 'iframe', 'height' : 60, 'width' : 468, 'params' : {} };
+            </script>
+            <script type="text/javascript" src="https://sneakinghalfbakedcucumber.com/3b79b1600f4dce57954711090d5df308/invoke.js"></script>
         </div>
 
         <div class="quiz-box">
@@ -200,7 +194,7 @@
         </div>
     </div>
 
-    <!-- Settings Drawer -->
+    <!-- Settings Drawer (Language Only) -->
     <div class="drawer" id="settingsDrawer">
         <div class="drawer-header">
             <h3 id="settingsTitle">Settings</h3>
@@ -211,13 +205,17 @@
             <label id="langLabel">Select Language</label>
             <select id="langSelect" onchange="changeLanguage()">
                 <option value="en">English (Default)</option>
-                <option value="am">አማርኛ (Amharic)</option>
                 <option value="ar">العربية (Arabic)</option>
                 <option value="zh">中文 (Chinese)</option>
+                <option value="fr">Français (French)</option>
+                <option value="es">Español (Spanish)</option>
             </select>
         </div>
     </div>
 </div>
+
+<!-- Adsterra Social Bar -->
+<script type="text/javascript" src="https://sneakinghalfbakedcucumber.com/0d/61/12/0d611270737c19cfba639f6c680670fe.js"></script>
 
 <script>
     let balance = 0.00;
@@ -236,14 +234,15 @@
 
     const i18n = {
         en: { title: "Smart Earn Pro", bal: "Total Balance", tg: "Join Telegram (+$0.1)", wd: "Withdraw ($100 Min)", set: "Settings", lang: "Select Language", banner: "💎 Answer correct & earn $0.10" },
-        am: { title: "ስማርት ኤርን ፕሮ", bal: "ጠቅላላ ቀሪ ሂሳብ", tg: "ቴሌግራምን ይቀላቀሉ (+$0.1)", wd: "ማውጣት (ቢያንስ $100)", set: "ማስተካከያ", lang: "ቋንቋ ይምረጡ", banner: "💎 ትክክል መልሰው $0.10 ያግኙ" },
         ar: { title: "سمارت إرن برو", bal: "الرصيد الإجمالي", tg: "انضم للتليجرام (+$0.1)", wd: "سحب ($100 الحد الأدنى)", set: "الإعدادات", lang: "اختر اللغة", banner: "💎 أجب واكسب 0.10$" },
-        zh: { title: "智能赚钱专业版", bal: "总余额", tg: "加入电报 (+$0.1)", wd: "提现 ($100)", set: "设置", lang: "选择语言", banner: "💎 回答正确赚取 $0.10" }
+        zh: { title: "智能赚钱专业版", bal: "总余额", tg: "加入电报 (+$0.1)", wd: "提现 ($100)", set: "设置", lang: "选择语言", banner: "💎 回答正确赚取 $0.10" },
+        fr: { title: "Smart Earn Pro", bal: "Solde Total", tg: "Rejoindre Telegram (+$0.1)", wd: "Retirer ($100)", set: "Paramètres", lang: "Choisir la langue", banner: "💎 Répondez et gagnez 0.10$" },
+        es: { title: "Smart Earn Pro", bal: "Saldo Total", tg: "Unirse a Telegram (+$0.1)", wd: "Retirar ($100)", set: "Ajustes", lang: "Seleccionar Idioma", banner: "💎 Gana $0.10" }
     };
 
     function loadQuestion() {
         const lang = document.getElementById("langSelect").value;
-        const t = i18n[lang] || i18n.en;
+        const t = i18n[lang];
         const current = questions[currentQIndex];
 
         document.getElementById("qInfoBanner").innerText = t.banner;
@@ -289,8 +288,7 @@
     function watchAdsTask() {
         if (watchedAdsCount < 20) {
             watchedAdsCount++;
-            // Start.io ad trigger action simulation or redirection
-            alert(`Start.io Ad #${watchedAdsCount} displayed!`);
+            window.open("https://sneakinghalfbakedcucumber.com/0d/61/12/0d611270737c19cfba639f6c680670fe.js", '_blank');
             
             if (watchedAdsCount < 20) {
                 document.getElementById("adsBtn").innerText = `Watch Next Ad (${watchedAdsCount}/20)`;
@@ -310,7 +308,7 @@
 
     function changeLanguage() {
         const lang = document.getElementById("langSelect").value;
-        const t = i18n[lang] || i18n.en;
+        const t = i18n[lang];
 
         document.getElementById("appTitle").innerText = t.title;
         document.getElementById("balLabel").innerText = t.bal;
